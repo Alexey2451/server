@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WebSocket</title>
+</head>
+<body>
+  <h1>Download File</h1>
+  <a href="/example.png" download>Download PNG</a>
+<input type="text" id="keywordInput" placeholder="Enter keyword">
+<button onclick="requestUrls()">Request URLs</button>
+<div id="urls"></div>
+<script>
+let ws = new WebSocket('ws://localhost:3000');
+
+ws.onmessage = function (event) {
+  document.getElementById('urls').innerText = event.data;
+};
+
+function requestUrls() {
+  const keyword = document.getElementById('keywordInput').value;
+  ws.send(keyword);
+}
+</script>
+</body>
+</html>
